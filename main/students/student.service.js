@@ -11,25 +11,25 @@ module.exports = {
 }
 async function create(params) {
     // validate
-    if (await db.G2Sstudent.findOne({ where: { email: params.email } })) {
+    if (await db.G2Sstudents.findOne({ where: { email: params.email } })) {
         throw 'Username "' + params.email + '" is already taken';
     }
     // hash password
     if (params.password) {
         params.hash = await bcrypt.hash(params.password, 10);
     }
-    await  db.G2Sstudent.create(params);
+    await  db.G2Sstudents.create(params);
     return ;
 
 }
 
 
 async function authenticate({ email, password }) {
-    // const user = await db.G2Sstudents.findOne({ where: { email:email} });
-    const user = await db.sequelize.query(`select Mail from students where g2sID = 0 and Mail = ${email}`, {
-        nest: true,
-        type: QueryTypes.SELECT
-    });
+    const user = await db.G2Sstudents.findOne({ where: { email:email} });
+    // const user = await db.sequelize.query(`select Mail from students where g2sID = 0 and Mail = ${email}`, {
+    //     nest: true,
+    //     type: QueryTypes.SELECT
+    // });
 
     
     // if (!user || !(await bcrypt.compare(password, user.hash)))
@@ -46,7 +46,7 @@ async function authenticate({ email, password }) {
 
 
 async function getallList () {
-    let data = await db.G2Sstudent.findAll();
+    let data = await db.G2Sstudents.findAll();
     let res = {rows:data};
     return res;
   }
@@ -59,7 +59,7 @@ function omitHash(user) {
 
 async function studentgetbyID(id) {
     // const list = await db.G2Sstudent.findByPk(id);
-     const list = await db.sequelize.query('SELECT s.* ,fu.filePath FROM students AS s LEFT JOIN fileuploads as fu on s.user_img_id = fu.id where s.id = ' + id, {
+     const list = await db.sequelize.query('SELECT s.* ,fu.filePath FROM G2Sstudents AS s LEFT JOIN G2Sfileuploads as fu on s.user_img_id = fu.id where s.id = ' + id, {
         nest: true,
         type: QueryTypes.SELECT
     });

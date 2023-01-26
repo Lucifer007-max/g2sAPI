@@ -32,7 +32,7 @@ async function getList(){
 
 async function getActiveCourse(){
     // let data = await db.G2Scourses.findOne({ where: { coursestatus: "1" } });
-    const data = await db.sequelize.query('SELECT c.* ,fu.filePath FROM G2Scourses AS c LEFT JOIN fileuploads as fu on c.courseimage = fu.id where c.coursestatus = 1', {
+    const data = await db.sequelize.query('SELECT c.* ,fu.filePath FROM G2Scourses AS c LEFT JOIN G2Sfileuploads as fu on c.courseimage = fu.id where c.coursestatus = 1', {
         nest: true,
         type: QueryTypes.SELECT
     });
