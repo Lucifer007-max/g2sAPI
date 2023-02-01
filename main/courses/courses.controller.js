@@ -11,6 +11,7 @@ router.get('/courseList' , getcourseList);
 router.get('/courseID/:id',  getbyID );
 router.post('/create' , authenticateSchema, create);
 router.get('/coursesLists' , getActiveCourse)
+router.delete('/coursedelete/:id' ,_delete )
 module.exports = router;
 
 function authenticateSchema(req, res, next) {
@@ -53,4 +54,10 @@ function getbyID (req , res , next) {
     courseService.getbyID(req.params.id)
     .then((list) => res.json(list))
     .catch(next);
+}
+
+function _delete(req, res, next) {
+    courseService.delete(req.params.id)
+        .then(() => res.json({ message: 'Course deleted successfully' }))
+        .catch(next);
 }

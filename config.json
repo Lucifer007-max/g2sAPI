@@ -1,5 +1,5 @@
 {
-    "dbName": "sql12593087",
+    "dbName": "sql12594922",
     "dbConfig": {
         "server": "sql12.freesqldatabase.com",
         "options": {
@@ -8,8 +8,8 @@
         "authentication": {
             "type": "default",
             "options": {
-                "userName": "sql12593087",
-                "password": "tAmg5j5v2A"
+                "userName": "sql12594922",
+                "password": "TFsfnJCZkr"
             }
         }
     },

@@ -7,7 +7,8 @@ module.exports = {
     create,
     getList,
     getbyID,
-    getActiveCourse
+    getActiveCourse,
+    delete:_delete
 
 };
     
@@ -46,3 +47,7 @@ async function getbyID(id) {
     return list;
 }
 
+async function _delete(id) {
+    const user = await db.G2Scourses.findByPk(id);
+    await user.destroy();
+}
